@@ -1,0 +1,10 @@
+*.html
+/logs
+
+/node_modules
+/dist
+
+/package-lock.json
+*.lock
+*.json
+.DS_Store
