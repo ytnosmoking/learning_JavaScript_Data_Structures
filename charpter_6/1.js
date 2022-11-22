@@ -233,15 +233,15 @@ class DoublyLinkedList extends LinkedList {
 }
 
 const b = new DoublyLinkedList()
-b.push(1)
-console.log(b)
-b.push(2)
-console.log(b)
-b.push(3)
-console.log(b)
-b.insert(4, 2)
-console.log(b)
-console.log('b------------')
+// b.push(1)
+// console.log(b)
+// b.push(2)
+// console.log(b)
+// b.push(3)
+// console.log(b)
+// b.insert(4, 2)
+// console.log(b)
+// console.log('b------------')
 // console.log(b.getElementAt(1))
 // console.log(b.getElementAt(2))
 // console.log(b.getElementAt(3))
@@ -343,16 +343,16 @@ class SortedLinkedList extends LinkedList {
 }
 
 const s = new SortedLinkedList()
-console.log('s------------')
-s.push(6)
-s.push(3)
-s.push(5)
-console.log(s.head)
-s.insert(2)
-s.insert(7)
-console.log(s.head)
-console.log(s.head.next)
-console.log(s.head.next.next)
+// console.log('s------------')
+// s.push(6)
+// s.push(3)
+// s.push(5)
+// console.log(s.head)
+// s.insert(2)
+// s.insert(7)
+// console.log(s.head)
+// console.log(s.head.next)
+// console.log(s.head.next.next)
 
 class StackLinkedList {
   constructor() {
@@ -369,4 +369,8 @@ class StackLinkedList {
     }
     return this.items.removeAt(this.size() - 1)
   }
+}
+
+module.exports = {
+  LinkedList
 }
