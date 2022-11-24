@@ -2,51 +2,51 @@
 
 const defaultToString = item => {
   if (item === null) {
-    return 'NULL'
+    return 'NULL';
   } else if (item === undefined) {
-    return 'UNDEFINED'
+    return 'UNDEFINED';
   } else if (typeof item === 'string' || item instanceof String) {
-    return `${item}`
+    return `${item}`;
   }
-  return item.toString()
-}
+  return item.toString();
+};
 
 class ValuePair {
   constructor(key, value) {
-    this.key = key
-    this.value = value
+    this.key = key;
+    this.value = value;
   }
 
   toString() {
-    return `{#${this.key}:${this.value}}`
+    return `{#${this.key}:${this.value}}`;
   }
 }
 
 class Dictionary {
   constructor(toStrFn = defaultToString) {
-    this.toStrFn = toStrFn
-    this.table = {}
+    this.toStrFn = toStrFn;
+    this.table = {};
   }
 
   hasKey(key) {
-    return this.table[this.toStrFn(key)] != null
+    return this.table[this.toStrFn(key)] != null;
   }
 
   set(key, value) {
     if (key !== null && value !== null) {
-      const tableKey = this.toStrFn(key)
-      this.table[tableKey] = new ValuePair(key, value)
-      return true
+      const tableKey = this.toStrFn(key);
+      this.table[tableKey] = new ValuePair(key, value);
+      return true;
     }
-    return false
+    return false;
   }
 
   remove(key) {
     if (this.hasKey(key)) {
-      delete this.table[this.toStrFn(key)]
-      return true
+      delete this.table[this.toStrFn(key)];
+      return true;
     }
-    return false
+    return false;
   }
 
   get(key) {
@@ -55,81 +55,81 @@ class Dictionary {
     // 们会获取两次 key 的字符串以及访问两次 table 对象：第一次
     // 是在 hasKey 方法中，第二次是在 if 语句内。这是个小细节，不过第一种方式的消耗更少
     if (this.hasKey(key)) {
-      return this.table[this.toStrFn(key)]
+      return this.table[this.toStrFn(key)];
     }
-    return undefined
+    return undefined;
   }
 
   keyValues() {
     // return Object.values(this.table)
 
-    const valuePair = []
+    const valuePair = [];
     for (const k in this.table) {
       if (this.hasKey(k)) {
-        valuePair.push(this.table[k])
+        valuePair.push(this.table[k]);
       }
     }
-    return valuePair
+    return valuePair;
   }
 
   keys() {
-    return this.keyValues().map(valuePair => valuePair.key)
+    return this.keyValues().map(valuePair => valuePair.key);
   }
 
   forEach(callbackFn) {
-    const valuePairs = this.keyValues()
+    const valuePairs = this.keyValues();
     for (let i = 0; i < valuePairs.length; i++) {
-      const result = callbackFn(valuePairs[i].key, valuePairs[i].value)
+      const result = callbackFn(valuePairs[i].key, valuePairs[i].value);
       if (result === false) {
-        break
+        break;
       }
     }
   }
 
   size() {
-    return Object.keys(this.table).length
+    return Object.keys(this.table).length;
   }
 
   isEmpty() {
-    return this.size() === 0
+    return this.size() === 0;
   }
 
   clear() {
-    this.table = 0
+    this.table = 0;
   }
 
   toString() {
     if (this.isEmpty()) {
-      return ''
+      return '';
     }
-    const valuePairs = this.keyValues()
-    let objString = `${valuePairs[0].toString()}` // {1}
+    const valuePairs = this.keyValues();
+    let objString = `${valuePairs[0].toString()}`; // {1}
     for (let i = 1; i < valuePairs.length; i++) {
-      objString = `${objString},${valuePairs[i].toString()}` // {2}
+      objString = `${objString},${valuePairs[i].toString()}`; // {2}
     }
-    return objString // {3}
+    return objString; // {3}
   }
 }
 
-const dictionary = new Dictionary()
-dictionary.set('Gandalf', 'gandalf@email.com')
-dictionary.set('John', 'johnsnow@email.com')
-dictionary.set('Tyrion', 'tyrion@email.com')
+const dictionary = new Dictionary();
+dictionary.set('Gandalf', 'gandalf@email.com');
+dictionary.set('John', 'johnsnow@email.com');
+dictionary.set('Tyrion', 'tyrion@email.com');
 
-console.log(dictionary.hasKey('Gandalf'))
+console.log(dictionary.hasKey('Gandalf'));
 
-console.log(dictionary.size())
+console.log(dictionary.size());
 
-console.log(dictionary.keys())
-console.log(dictionary.values())
-console.log(dictionary.get('Tyrion'))
+console.log(dictionary.keys());
+console.log(dictionary.values());
+console.log(dictionary.get('Tyrion'));
 
-dictionary.remove('John')
+dictionary.remove('John');
 
-console.log(dictionary.keys())
-console.log(dictionary.values())
-console.log(dictionary.keyValues())
+console.log(dictionary.keys());
+console.log(dictionary.values());
+console.log(dictionary.keyValues());
 
 dictionary.forEach((k, v) => {
-  console.log('forEach: ', `key: ${k}, value: ${v}`)
-})
+  console.log('forEach: ', `key: ${k}, value: ${v}`);
+});

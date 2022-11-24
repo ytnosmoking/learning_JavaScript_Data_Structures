@@ -19,8 +19,8 @@
 // console.log(`5 << 1`, 5 << 1); // 10 101 => 1010
 // console.log(`5 >> 1`, 5 >> 1); // 2 101=> 10
 // typeof
-console.log('typeof num:', typeof num)
-console.log('typeof Packt:', typeof 'Packt')
-console.log('typeof true:', typeof true)
-console.log('typeof [1,2,3]:', typeof [1, 2, 3])
-console.log('typeof {name:John}:', typeof { name: 'John' })
+console.log('typeof num:', typeof num);
+console.log('typeof Packt:', typeof 'Packt');
+console.log('typeof true:', typeof true);
+console.log('typeof [1,2,3]:', typeof [1, 2, 3]);
+console.log('typeof {name:John}:', typeof { name: 'John' });

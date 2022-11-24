@@ -2,69 +2,69 @@
 
 class Set {
   constructor() {
-    this.items = {}
+    this.items = {};
   }
 
   // has(element) {
   //   return element in this.items
   // }
   has(element) {
-    return Object.prototype.hasOwnProperty.call(this.items, element)
+    return Object.prototype.hasOwnProperty.call(this.items, element);
   }
 
   add(element) {
     if (!this.has(element)) {
-      this.items[element] = element
-      return true
+      this.items[element] = element;
+      return true;
     }
-    return false
+    return false;
   }
 
   delete(element) {
     if (this.has(element)) {
-      delete this.items[element]
-      return true
+      delete this.items[element];
+      return true;
     }
-    return false
+    return false;
   }
 
   clear() {
-    this.items = {}
+    this.items = {};
   }
 
   size() {
-    return Object.keys(this.items).length
+    return Object.keys(this.items).length;
   }
 
   sizeLegacy() {
-    let count = 0
+    let count = 0;
     for (const key in this.items) {
       if (Object.prototype.hasOwnProperty.call(this.items, key)) {
-        count++
+        count++;
       }
     }
-    return count
+    return count;
   }
 
   values() {
-    return Object.values(this.items)
+    return Object.values(this.items);
   }
 
   valueLegacy() {
-    const values = []
+    const values = [];
     for (const key in this.items) {
       if (Object.prototype.hasOwnProperty.call(this.items, key)) {
-        values.push(this.items[key])
+        values.push(this.items[key]);
       }
     }
-    return values
+    return values;
   }
 
   union(otherSet) {
-    const unionSet = new Set()
-    this.values().forEach(value => unionSet.add(value))
-    otherSet.values().forEach(value => unionSet.add(value))
-    return unionSet
+    const unionSet = new Set();
+    this.values().forEach(value => unionSet.add(value));
+    otherSet.values().forEach(value => unionSet.add(value));
+    return unionSet;
   }
 
   intersection(otherSet) {
@@ -78,35 +78,35 @@ class Set {
     // return intersectionSet
 
     // 改进循环
-    const intersectionSet = new Set()
-    const values = this.values()
-    let biggerSet = values
-    let smallerSet = otherSet.values()
+    const intersectionSet = new Set();
+    const values = this.values();
+    let biggerSet = values;
+    let smallerSet = otherSet.values();
     if (smallerSet.length - biggerSet.length > 0) {
-      biggerSet = otherSet.values()
-      smallerSet = values
+      biggerSet = otherSet.values();
+      smallerSet = values;
     }
     smallerSet.forEach(value => {
       if (biggerSet.includes(value)) {
-        intersectionSet.add(value)
+        intersectionSet.add(value);
       }
-    })
-    return intersectionSet
+    });
+    return intersectionSet;
   }
 
   difference(otherSet) {
-    const differenceSet = new Set()
+    const differenceSet = new Set();
     this.values().forEach(value => {
       if (!otherSet.has(value)) {
-        differenceSet.add(value)
+        differenceSet.add(value);
       }
-    })
-    return differenceSet
+    });
+    return differenceSet;
   }
 
   isSubsetOf(otherSet) {
     if (this.size() > otherSet.size()) {
-      return false
+      return false;
     }
 
     // let isSubset = true
@@ -118,7 +118,7 @@ class Set {
     //   return true
     // })
     // return isSubset
-    return this.values().every(value => otherSet.has(value))
+    return this.values().every(value => otherSet.has(value));
   }
 }
 
@@ -151,19 +151,19 @@ class Set {
 // console.log(unionAB)
 // console.log(unionAB.values())
 
-const setA = new Set()
-setA.add(1)
-setA.add(2)
-setA.add(3)
-setA.add(5)
-const setB = new Set()
-setB.add(1)
-setB.add(2)
-setB.add(3)
-setB.add(4)
-setB.add(5)
-const intersectionAB = setA.intersection(setB)
-console.log(intersectionAB.values())
-const differenceAB = setA.difference(setB)
-console.log(differenceAB.values())
-console.log(setA.isSubsetOf(setB))
+const setA = new Set();
+setA.add(1);
+setA.add(2);
+setA.add(3);
+setA.add(5);
+const setB = new Set();
+setB.add(1);
+setB.add(2);
+setB.add(3);
+setB.add(4);
+setB.add(5);
+const intersectionAB = setA.intersection(setB);
+console.log(intersectionAB.values());
+const differenceAB = setA.difference(setB);
+console.log(differenceAB.values());
+console.log(setA.isSubsetOf(setB));

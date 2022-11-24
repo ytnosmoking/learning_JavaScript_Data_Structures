@@ -1,33 +1,33 @@
 // 散列表
 
-const { LinkedList } = require('../charpter_6/1')
+const { LinkedList } = require('../charpter_6/1');
 
 // HashTable
 const defaultToString = item => {
   if (item === null) {
-    return 'NULL'
+    return 'NULL';
   } else if (item === undefined) {
-    return 'UNDEFINED'
+    return 'UNDEFINED';
   } else if (typeof item === 'string' || item instanceof String) {
-    return `${item}`
+    return `${item}`;
   }
-  return item.toString()
-}
+  return item.toString();
+};
 
 class ValuePair {
   constructor(key, value) {
-    this.key = key
-    this.value = value
+    this.key = key;
+    this.value = value;
   }
 
   toString() {
-    return `{#${this.key}:${this.value}}`
+    return `{#${this.key}:${this.value}}`;
   }
 }
 class HashTable {
   constructor(toStrFn = defaultToString) {
-    this.toStrFn = toStrFn
-    this.table = {}
+    this.toStrFn = toStrFn;
+    this.table = {};
   }
 
   loseloseHashCode(key) {
@@ -41,66 +41,66 @@ class HashTable {
     // }
 
     // return hash % 37
-    return this.djb2HashCode(key)
+    return this.djb2HashCode(key);
   }
 
   // another losehashCode
   djb2HashCode(key) {
-    const tableKey = this.toStrFn(key)
-    let hash = 5381
+    const tableKey = this.toStrFn(key);
+    let hash = 5381;
     for (let i = 0; i < tableKey.length; i++) {
-      hash = hash * 33 + tableKey.charCodeAt(i)
+      hash = hash * 33 + tableKey.charCodeAt(i);
     }
-    return hash % 1013
+    return hash % 1013;
   }
 
   hashCode(key) {
-    return this.loseloseHashCode(key)
+    return this.loseloseHashCode(key);
   }
 
   put(key, value) {
     if (key != null && value != null) {
-      const position = this.hashCode(key)
-      this.table[position] = new ValuePair(key, value)
-      return true
+      const position = this.hashCode(key);
+      this.table[position] = new ValuePair(key, value);
+      return true;
     }
-    return false
+    return false;
   }
 
   get(key) {
-    const valuePair = this.table[this.hashCode(key)]
-    return valuePair == null ? undefined : valuePair.value
+    const valuePair = this.table[this.hashCode(key)];
+    return valuePair == null ? undefined : valuePair.value;
   }
 
   remove(key) {
-    const hash = this.hashCode(key) // {1}
-    const valuePair = this.table[hash] // {2}
+    const hash = this.hashCode(key); // {1}
+    const valuePair = this.table[hash]; // {2}
     if (valuePair != null) {
-      delete this.table[hash] // {3}
-      return true
+      delete this.table[hash]; // {3}
+      return true;
     }
-    return false
+    return false;
   }
 
   size() {
-    return Object.keys(this.table).length
+    return Object.keys(this.table).length;
   }
 
   isEmpty() {
-    return this.size() === 0
+    return this.size() === 0;
   }
 
   toString() {
     if (this.isEmpty()) {
-      return ''
+      return '';
     }
-    const keys = Object.keys(this.table)
-    let objString = `{${keys[0]} => ${this.table[keys[0]].toString()}}`
+    const keys = Object.keys(this.table);
+    let objString = `{${keys[0]} => ${this.table[keys[0]].toString()}}`;
     for (let i = 1; i < keys.length; i++) {
       objString = `${objString},{${keys[i]} => 
-   ${this.table[keys[i]].toString()}}`
+   ${this.table[keys[i]].toString()}}`;
     }
-    return objString
+    return objString;
   }
 }
 
@@ -146,55 +146,55 @@ class HashTable {
 
 class HashTableSeparateChaining extends HashTable {
   constructor(toStrFn = defaultToString) {
-    super(toStrFn)
-    this.toStrFn = toStrFn
-    this.table = {}
+    super(toStrFn);
+    this.toStrFn = toStrFn;
+    this.table = {};
   }
 
   put(key, value) {
     if (key != null && value != null) {
-      const position = this.hashCode(key)
+      const position = this.hashCode(key);
       if (this.table[position] == null) {
-        this.table[position] = new LinkedList()
+        this.table[position] = new LinkedList();
       }
-      this.table[position].push(new ValuePair(key, value))
-      return true
+      this.table[position].push(new ValuePair(key, value));
+      return true;
     }
-    return false
+    return false;
   }
 
   get(key) {
-    const position = this.hashCode(key)
-    const linkedList = this.table[position]
+    const position = this.hashCode(key);
+    const linkedList = this.table[position];
     if (linkedList != null && !linkedList.isEmpty()) {
-      let current = linkedList.getHead()
+      let current = linkedList.getHead();
       while (current != null) {
         if (current.element.key === key) {
-          return current.element.value
+          return current.element.value;
         }
-        current = current.next
+        current = current.next;
       }
     }
-    return undefined
+    return undefined;
   }
 
   remove(key) {
-    const position = this.hashCode(key)
-    const linkedList = this.table[position]
+    const position = this.hashCode(key);
+    const linkedList = this.table[position];
     if (linkedList != null && !linkedList.isEmpty()) {
-      let current = linkedList.getHead()
+      let current = linkedList.getHead();
       while (current != null) {
         if (current.element.key === key) {
-          linkedList.remove(current.element)
+          linkedList.remove(current.element);
           if (linkedList.isEmpty()) {
-            delete this.table[position]
+            delete this.table[position];
           }
-          return true
+          return true;
         }
-        current = current.next
+        current = current.next;
       }
     }
-    return false
+    return false;
   }
 }
 
@@ -237,62 +237,62 @@ class HashTableSeparateChaining extends HashTable {
 
 class HashTableLinearProbingLazy extends HashTable {
   constructor(toStrFn = defaultToString) {
-    super(toStrFn)
+    super(toStrFn);
   }
 
   put(key, value) {
     if (key != null && value != null) {
-      const position = this.hashCode(key)
+      const position = this.hashCode(key);
       if (this.table[position] == null) {
-        this.table[position] = new ValuePair(key, value)
+        this.table[position] = new ValuePair(key, value);
       } else {
-        let index = position + 1
+        let index = position + 1;
         while (this.table[index] != null) {
-          index++
+          index++;
         }
-        this.table[index] = new ValuePair(key, value)
+        this.table[index] = new ValuePair(key, value);
       }
-      return true
+      return true;
     }
-    return false
+    return false;
   }
 
   get(key) {
-    const position = this.hashCode(key)
+    const position = this.hashCode(key);
     if (this.table[position] != null) {
       if (this.table[position].key === key) {
-        return this.table[position].value
+        return this.table[position].value;
       }
-      let index = position + 1
+      let index = position + 1;
       while (this.table[index] !== null && this.table[index].key !== key) {
-        index++
+        index++;
       }
       if (this.table[index] !== null && this.table[index].key === key) {
-        return this.table[index].value
+        return this.table[index].value;
       }
     }
-    return undefined
+    return undefined;
   }
 
   remove(key) {
-    const position = this.hashCode(key)
+    const position = this.hashCode(key);
     if (this.table[position] != null) {
       if (this.table[position].key === key) {
-        delete this.table[position]
-        this.verifyRemoveSideEffect(key, position) // {2}
-        return true
+        delete this.table[position];
+        this.verifyRemoveSideEffect(key, position); // {2}
+        return true;
       }
-      let index = position + 1
+      let index = position + 1;
       while (this.table[index] != null && this.table[index].key === key) {
-        index++
+        index++;
       }
       if (this.table[index] != null && this.table[index].key === key) {
-        delete this.table[index]
-        this.verifyRemoveSideEffect(key, index)
-        return true
+        delete this.table[index];
+        this.verifyRemoveSideEffect(key, index);
+        return true;
       }
     }
-    return false
+    return false;
   }
 
   // verifyRemoveSideEffect(key, removedPosition) {
@@ -310,39 +310,39 @@ class HashTableLinearProbingLazy extends HashTable {
   // }
 
   verifyRemoveSideEffect(key, removedPosition) {
-    const hash = this.hashCode(key) // {1}
-    let index = removedPosition + 1 // {2}
-    console.log(key, hash, removedPosition, index)
+    const hash = this.hashCode(key); // {1}
+    let index = removedPosition + 1; // {2}
+    console.log(key, hash, removedPosition, index);
     while (this.table[index] != null) {
       // {3}
-      const posHash = this.hashCode(this.table[index].key) // {4}
+      const posHash = this.hashCode(this.table[index].key); // {4}
       if (posHash <= hash || posHash <= removedPosition) {
         // {5}
-        this.table[removedPosition] = this.table[index] // {6}
-        delete this.table[index]
-        removedPosition = index
+        this.table[removedPosition] = this.table[index]; // {6}
+        delete this.table[index];
+        removedPosition = index;
       }
-      index++
+      index++;
     }
   }
 }
 
-const hashTableLazy = new HashTableLinearProbingLazy()
+const hashTableLazy = new HashTableLinearProbingLazy();
 
-hashTableLazy.put('Ygritte', 'ygritte@email.com')
-hashTableLazy.put('Jonathan', 'jonathan@email.com')
-hashTableLazy.put('Jamie', 'jamie@email.com')
-hashTableLazy.put('Jack', 'jack@email.com')
-hashTableLazy.put('Jasmine', 'jasmine@email.com')
-hashTableLazy.put('Jake', 'jake@email.com')
-hashTableLazy.put('Nathan', 'nathan@email.com')
-hashTableLazy.put('Athelstan', 'athelstan@email.com')
-hashTableLazy.put('Sue', 'sue@email.com')
-hashTableLazy.put('Aethelwulf', 'aethelwulf@email.com')
-hashTableLazy.put('Sargeras', 'sargeras@email.com')
-console.log(hashTableLazy)
-hashTableLazy.remove('Jonathan')
-console.log(hashTableLazy)
+hashTableLazy.put('Ygritte', 'ygritte@email.com');
+hashTableLazy.put('Jonathan', 'jonathan@email.com');
+hashTableLazy.put('Jamie', 'jamie@email.com');
+hashTableLazy.put('Jack', 'jack@email.com');
+hashTableLazy.put('Jasmine', 'jasmine@email.com');
+hashTableLazy.put('Jake', 'jake@email.com');
+hashTableLazy.put('Nathan', 'nathan@email.com');
+hashTableLazy.put('Athelstan', 'athelstan@email.com');
+hashTableLazy.put('Sue', 'sue@email.com');
+hashTableLazy.put('Aethelwulf', 'aethelwulf@email.com');
+hashTableLazy.put('Sargeras', 'sargeras@email.com');
+console.log(hashTableLazy);
+hashTableLazy.remove('Jonathan');
+console.log(hashTableLazy);
 
 // console.log(hashTableLazy.get('Ygritte'), 'Ygritte')
 // console.log(hashTableLazy.get('Jonathan'), 'Jonathan')

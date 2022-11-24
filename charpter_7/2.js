@@ -1,6 +1,6 @@
 //  原生set类
 
-const set = new Set()
+const set = new Set();
 
 // set.add(1)
 // set.add(2)
@@ -20,11 +20,11 @@ const union = (setA, setB) => {
 
   // // setA.forEach(value => unionAB.add(value))
   // // setB.forEach(value => unionAB.add(value))
-  const unionAB = new Set([...setA, ...setB])
-  return unionAB
-}
-const setA = new Set([1, 2, 3, 4])
-const setB = new Set([2, 3, 4, 5])
+  const unionAB = new Set([...setA, ...setB]);
+  return unionAB;
+};
+const setA = new Set([1, 2, 3, 4]);
+const setB = new Set([2, 3, 4, 5]);
 
 const intersection = (setA, setB) => {
   // const intersectionSet = new Set()
@@ -36,8 +36,8 @@ const intersection = (setA, setB) => {
   // })
 
   // return intersectionSet
-  return new Set([...setA].filter(value => setB.has(value)))
-}
+  return new Set([...setA].filter(value => setB.has(value)));
+};
 
 const difference = (setA, setB) => {
   // const differenceSet = new Set()
@@ -47,10 +47,10 @@ const difference = (setA, setB) => {
   //   }
   // })
   // return differenceSet
-  return new Set([...setA].filter(value => !setB.has(value)))
-}
+  return new Set([...setA].filter(value => !setB.has(value)));
+};
 
-console.log('union', union(setA, setB))
-console.log('intersection', intersection(setA, setB))
-console.log('difference', difference(setA, setB))
-console.log('difference', difference(setB, setA))
+console.log('union', union(setA, setB));
+console.log('intersection', intersection(setA, setB));
+console.log('difference', difference(setA, setB));
+console.log('difference', difference(setB, setA));
