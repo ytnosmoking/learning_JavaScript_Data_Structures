@@ -429,3 +429,12 @@ console.log(
   bNodes.right?.right?.right?.key,
   bNodes.right?.right?.right?.right?.key
 );
+
+module.exports = {
+  Compare,
+  defaultCompare,
+  BalanceFactor,
+  Node,
+  BinarySearchTree,
+  AVLTree
+};
