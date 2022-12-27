@@ -50,14 +50,14 @@ class Dictionary {
   }
 
   get(key) {
-    // const valuePair = this.table[this.toStrFn(key)]
-    // return valuePair === null ? undefined : valuePair.value
+    const valuePair = this.table[this.toStrFn(key)];
+    return valuePair === null ? undefined : valuePair.value;
     // 们会获取两次 key 的字符串以及访问两次 table 对象：第一次
     // 是在 hasKey 方法中，第二次是在 if 语句内。这是个小细节，不过第一种方式的消耗更少
-    if (this.hasKey(key)) {
-      return this.table[this.toStrFn(key)];
-    }
-    return undefined;
+    // if (this.hasKey(key)) {
+    //   return this.table[this.toStrFn(key)];
+    // }
+    // return undefined;
   }
 
   keyValues() {
@@ -116,20 +116,24 @@ dictionary.set('Gandalf', 'gandalf@email.com');
 dictionary.set('John', 'johnsnow@email.com');
 dictionary.set('Tyrion', 'tyrion@email.com');
 
-console.log(dictionary.hasKey('Gandalf'));
+// console.log(dictionary.hasKey('Gandalf'));
 
-console.log(dictionary.size());
+// console.log(dictionary.size());
 
-console.log(dictionary.keys());
-console.log(dictionary.values());
-console.log(dictionary.get('Tyrion'));
+// console.log(dictionary.keys());
+// console.log(dictionary.values());
+// console.log(dictionary.get('Tyrion'));
 
 dictionary.remove('John');
 
-console.log(dictionary.keys());
-console.log(dictionary.values());
-console.log(dictionary.keyValues());
+// console.log(dictionary.keys());
+// console.log(dictionary.values());
+// console.log(dictionary.keyValues());
 
-dictionary.forEach((k, v) => {
-  console.log('forEach: ', `key: ${k}, value: ${v}`);
-});
+// dictionary.forEach((k, v) => {
+//   console.log('forEach: ', `key: ${k}, value: ${v}`);
+// });
+
+module.exports = {
+  Dictionary
+};

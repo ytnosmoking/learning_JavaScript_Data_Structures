@@ -214,12 +214,12 @@ tree.insert(6);
 // getLeftAndRight(tree, allLefts)
 // console.log(allLefts)
 
-console.log(tree.min());
-console.log(tree.max());
-console.log(tree.search(1));
-console.log(tree.search(3));
+// console.log(tree.min());
+// console.log(tree.max());
+// console.log(tree.search(1));
+// console.log(tree.search(3));
 tree.remove(7);
-console.log(tree);
+// console.log(tree);
 
 const startArr = [];
 const middleArr = [];
@@ -233,9 +233,9 @@ const pushEnd = value => endArr.push(value);
 tree.preOrderTraverse(pushStart);
 tree.inOrderTraverse(pushMiddle);
 tree.postOrderTraverse(pushEnd);
-console.log(startArr);
-console.log(middleArr);
-console.log(endArr);
+// console.log(startArr);
+// console.log(middleArr);
+// console.log(endArr);
 
 //  平衡树 AVL（Adelson-Velskii-Landi） 添加或移除节点时，AVL树会尝试保持自平衡
 const BalanceFactor = {
@@ -413,22 +413,22 @@ bNode1.insert(2);
 // bNode1.insert(9)
 // bNode1.insert(10)
 // bNode1.insert(11)
-console.log(bNode1);
+// console.log(bNode1);
 const bNodes = bNode1.root;
-console.log(
-  'left',
-  bNodes.left?.key,
-  bNodes.left?.left?.key,
-  bNodes.left?.left?.left?.key,
-  bNodes.left?.left?.left?.left?.key
-);
-console.log(
-  'right',
-  bNodes.right?.key,
-  bNodes.right?.right?.key,
-  bNodes.right?.right?.right?.key,
-  bNodes.right?.right?.right?.right?.key
-);
+// console.log(
+//   'left',
+//   bNodes.left?.key,
+//   bNodes.left?.left?.key,
+//   bNodes.left?.left?.left?.key,
+//   bNodes.left?.left?.left?.left?.key
+// );
+// console.log(
+//   'right',
+//   bNodes.right?.key,
+//   bNodes.right?.right?.key,
+//   bNodes.right?.right?.right?.key,
+//   bNodes.right?.right?.right?.right?.key
+// );
 
 module.exports = {
   Compare,

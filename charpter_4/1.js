@@ -38,12 +38,12 @@ class Stack {
 }
 
 const stack = new Stack();
-console.log(stack, stack.isEmpty());
+// console.log(stack, stack.isEmpty());
 stack.push(1);
 stack.push(2);
 stack.push(3);
-console.log(stack, stack.isEmpty());
-console.log('peek', stack.peek());
+// console.log(stack, stack.isEmpty());
+// console.log('peek', stack.peek());
 
 function decimalToBinary(decNumber) {
   const remStack = new Stack();
@@ -63,5 +63,8 @@ function decimalToBinary(decNumber) {
   return binaryString;
 }
 
-console.log(process.argv);
-console.log(decimalToBinary(process.argv[2] || 5));
+// console.log(process.argv);
+// console.log(decimalToBinary(process.argv[2] || 5));
+module.exports = {
+  Stack
+};

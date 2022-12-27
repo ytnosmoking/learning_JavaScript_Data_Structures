@@ -58,21 +58,21 @@ class Queue {
 }
 
 const queue = new Queue();
-console.log(queue.isEmpty());
+// console.log(queue.isEmpty());
 
 queue.enqueue('John');
 queue.enqueue('Jack');
-console.log(queue);
-console.log(queue.toString());
+// console.log(queue);
+// console.log(queue.toString());
 
 queue.enqueue('Camila');
 
-console.log(queue.toString()); // John, Jack, Camila
-console.log(queue.size()); // 输出 3
-console.log(queue.isEmpty()); // 输出 false
+// console.log(queue.toString()); // John, Jack, Camila
+// console.log(queue.size()); // 输出 3
+// console.log(queue.isEmpty()); // 输出 false
 queue.dequeue(); // 移除 John
 queue.dequeue(); // 移除 Jack
-console.log(queue.toString()); // Camila
+// console.log(queue.toString()); // Camila
 
 function hotPotato(elementsList, num) {
   const queue = new Queue(); // {1}
@@ -89,7 +89,7 @@ function hotPotato(elementsList, num) {
     elimitatedList.push(queue.dequeue()); // {4}
   }
 
-  console.log(queue);
+  // console.log(queue);
   return {
     eliminated: elimitatedList,
     winner: queue.dequeue() // {5}
@@ -99,7 +99,11 @@ function hotPotato(elementsList, num) {
 const names = ['John', 'Jack', 'Camila', 'Ingrid', 'Carl'];
 const result = hotPotato(names, 7);
 
-result.eliminated.forEach(name => {
-  console.log(`${name}在击鼓传花游戏中被淘汰。`);
-});
-console.log(`胜利者： ${result.winner}`);
+// result.eliminated.forEach(name => {
+//   console.log(`${name}在击鼓传花游戏中被淘汰。`);
+// });
+// console.log(`胜利者： ${result.winner}`);
+
+module.exports = {
+  Queue
+};
