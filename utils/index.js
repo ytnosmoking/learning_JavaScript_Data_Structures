@@ -10,6 +10,13 @@ function defaultCompare(a, b) {
   return a < b ? Compare.LESS_THAN : Compare.BIGGER_THAN;
 }
 
+function sleep(time = 1000) {
+  const oldTime = Date.now();
+  while (Date.now() - oldTime < time) {
+    continue;
+  }
+}
+
 module.exports = {
   Compare,
   defaultCompare
